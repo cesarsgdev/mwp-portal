@@ -44,7 +44,7 @@ router.post("/", async (req, res) => {
             roles: user.roles,
             devs: user.devs,
           },
-          "rayados",
+          key,
           { expiresIn: "10h" }
         );
 
