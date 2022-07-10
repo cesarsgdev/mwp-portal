@@ -9,7 +9,7 @@ const websiteSchema = new Schema(
       trim: true,
       minlength: 5,
       maxlength: 50,
-      enum: ["wordpress", "woocommerce"],
+      unique: true,
     },
 
     category: {
@@ -18,6 +18,7 @@ const websiteSchema = new Schema(
       trim: true,
       minlength: 5,
       maxlength: 11,
+      enum: ["wordpress", "woocommerce"],
     },
 
     user: {
@@ -38,7 +39,6 @@ const websiteSchema = new Schema(
 
     admin_url: {
       type: String,
-      required: true,
       trim: true,
       minlength: 5,
       maxlength: 100,

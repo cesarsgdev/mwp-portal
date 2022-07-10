@@ -2,8 +2,9 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
-const users = require("./routes/usersRoute");
 const login = require("./routes/loginRoute");
+const users = require("./routes/usersRoute");
+const websites = require("./routes/websitesRoute");
 
 require("dotenv").config();
 
@@ -16,6 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 // API Routes
 app.use("/api/login", login);
 app.use("/api/users", users);
+app.use("/api/websites", websites);
 
 app.get("/", (req, res) => {
   res.status(200).json({ message: `This is the main route` });
