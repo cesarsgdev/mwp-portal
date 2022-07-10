@@ -1,8 +1,16 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
+const uuid = require("uuid");
+const encryption = require("../utils/encryption");
 
 const websiteSchema = new Schema(
   {
+    _id: {
+      type: String,
+      trim: true,
+      required: true,
+      default: uuid.v4,
+    },
     url: {
       type: String,
       required: true,
@@ -34,7 +42,6 @@ const websiteSchema = new Schema(
       required: true,
       trim: true,
       minlength: 7,
-      maxlength: 50,
     },
 
     admin_url: {
@@ -50,9 +57,35 @@ const websiteSchema = new Schema(
       trim: true,
       ref: "users",
     },
+
+    base64string: {
+      type: String,
+      trim: true,
+    },
   },
   { timestamps: true }
 );
+
+websiteSchema.pre("save", function (next) {
+  const website = this;
+
+  const { encryptedPassword, base64data } = encryption.encrypt(
+    website.password
+  );
+
+  website.password = encryptedPassword;
+  website.base64string = base64data;
+  next();
+});
+
+websiteSchema.post("findOne", function (result) {
+  const decryptedPassword = encryption.decrypt(
+    result.base64string,
+    result.password
+  );
+  delete result._doc.base64string;
+  result.password = decryptedPassword;
+});
 
 const websiteModel = mongoose.model("websites", websiteSchema);
 

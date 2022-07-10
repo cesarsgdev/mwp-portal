@@ -6,7 +6,20 @@ const Website = require("../models/websiteModel");
 router.get("/", async (req, res) => {});
 
 // Endpoint to get a single website by :id. GET => /api/websites/:id
-router.get("/:id", async (req, res) => {});
+router.get("/:id", async (req, res) => {
+  try {
+    const website = await Website.findById(req.params.id);
+    if (website) {
+      res.status(200).json({ success: true, data: website });
+      return;
+    } else {
+      res.status(200).json({ success: false, message: website });
+      return;
+    }
+  } catch (e) {
+    res.status(400).json({ success: false, message: `${e.message}` });
+  }
+});
 
 // Endpoint to create a new website. POST => /api/websites/
 router.post("/", async (req, res) => {
