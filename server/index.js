@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const users = require("./routes/usersRoute");
+const login = require("./routes/loginRoute");
 
 require("dotenv").config();
 
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // API Routes
+app.use("/api/login", login);
 app.use("/api/users", users);
 
 app.get("/", (req, res) => {
