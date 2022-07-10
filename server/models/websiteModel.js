@@ -49,6 +49,7 @@ const websiteSchema = new Schema(
       trim: true,
       minlength: 5,
       maxlength: 100,
+      default: null,
     },
 
     user_id: {
