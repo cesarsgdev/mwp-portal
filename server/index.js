@@ -5,6 +5,7 @@ const cors = require("cors");
 const login = require("./routes/loginRoute");
 const users = require("./routes/usersRoute");
 const websites = require("./routes/websitesRoute");
+const tasks = require("./routes/tasksRoute");
 
 require("dotenv").config();
 
@@ -18,6 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/login", login);
 app.use("/api/users", users);
 app.use("/api/websites", websites);
+app.use("/api/tasks", tasks);
 
 app.get("/", (req, res) => {
   res.status(200).json({ message: `This is the main route` });

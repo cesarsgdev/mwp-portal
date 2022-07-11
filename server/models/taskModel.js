@@ -6,10 +6,7 @@ const taskSchema = new Schema(
   {
     _id: {
       type: String,
-      trim: true,
-      required: true,
       default: uuid.v4,
-      unique: true,
     },
 
     title: {
@@ -25,11 +22,19 @@ const taskSchema = new Schema(
       trim: true,
       required: true,
       enum: [
-        "New site",
-        "Style(CSS)",
-        "Blog Post",
+        "New website",
+        "New Features",
+        "New Post",
+        "Woocommerce",
+        "Styling (CSS)",
+        "Installation & Setup",
+        "Updates",
+        "Website Migration",
+        "Backups",
         "Security",
-        "Optimizations",
+        "Optimization",
+        "Consulting / Questions",
+        "Other",
       ],
     },
 
@@ -44,8 +49,8 @@ const taskSchema = new Schema(
       type: String,
       trim: true,
       required: true,
-      enum: ["Open", "In-progress", "Completed"],
-      default: "Open",
+      enum: ["open", "working", "completed"],
+      default: "open",
     },
 
     dev_id: {

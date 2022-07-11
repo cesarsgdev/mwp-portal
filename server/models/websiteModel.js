@@ -7,8 +7,6 @@ const websiteSchema = new Schema(
   {
     _id: {
       type: String,
-      trim: true,
-      required: true,
       default: uuid.v4,
     },
     url: {
@@ -86,6 +84,15 @@ websiteSchema.post("findOne", function (result) {
   );
   delete result._doc.base64string;
   result.password = decryptedPassword;
+});
+
+websiteSchema.post("find", function (result) {
+  const decryptedPassword = encryption.decrypt(
+    result[0].base64string,
+    result[0].password
+  );
+  delete result[0]._doc.base64string;
+  result[0].password = decryptedPassword;
 });
 
 const websiteModel = mongoose.model("websites", websiteSchema);
