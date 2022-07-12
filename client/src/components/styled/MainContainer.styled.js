@@ -8,4 +8,10 @@ export const MainContainer = styled.div`
   ${({ justify }) => (justify ? "justify-content:" + justify + ";" : "")}
   ${({ align }) => (align ? "align-items:" + align + ";" : "")}
   ${({ background }) => (background ? "background:" + background + ";" : null)}
+
+  & > div {
+    display: flex;
+    flex-flow: column;
+    flex: 1 0 80%;
+  }
 `;

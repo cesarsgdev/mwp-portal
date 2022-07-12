@@ -29,6 +29,7 @@
   --error-warning: rgb(254, 201, 201);
   --gray: rgb(228, 228, 228);
   --main-font: Geomanist;
+  --main-bg: rgb(245, 245, 245);
 }
 
 * {
@@ -47,6 +48,7 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
+  background: var(--main-bg);
 }
 
 h1 {

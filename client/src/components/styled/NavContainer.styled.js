@@ -29,26 +29,28 @@ export const NavContainer = styled.section`
   }
 
   & li {
-    margin: 20px 0;
   }
 
   & li a {
     display: flex;
     gap: 20px;
     font-family: var(--main-font);
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 700;
     color: #fff;
     text-decoration: none;
     transition: 0.5s;
-    padding: 0 20px;
+    padding: 15px;
+    border-left: 2.5px solid var(--main);
   }
 
   & li a:hover {
     color: var(--main-sub);
+    border-left: 2.5px solid var(--main-sub);
   }
 
   & .activeSection {
     color: var(--main-sub);
+    border-left: 2.5px solid var(--main-sub);
   }
 `;

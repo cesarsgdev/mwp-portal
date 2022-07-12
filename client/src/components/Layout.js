@@ -3,7 +3,7 @@ import jwt_decode from "jwt-decode";
 import { Outlet, Navigate, useLocation } from "react-router-dom";
 import { MainContainer } from "./styled/MainContainer.styled";
 import Nav from "./Nav";
-
+import InfoBar from "./InfoBar";
 const Layout = () => {
   const token = localStorage.getItem("token");
   const [isExpired, setIsExpired] = useState(false);
@@ -27,7 +27,10 @@ const Layout = () => {
     <>
       <MainContainer>
         <Nav></Nav>
-        {!token || isExpired ? <Navigate to="/login"></Navigate> : <Outlet />};
+        <div>
+          <InfoBar />
+          {!token || isExpired ? <Navigate to="/login"></Navigate> : <Outlet />}
+        </div>
       </MainContainer>
     </>
   );
