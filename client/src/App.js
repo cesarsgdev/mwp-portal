@@ -7,6 +7,7 @@ import Websites from "./pages/Websites";
 import Documentation from "./pages/Documentation";
 import Affiliates from "./pages/Affiliates";
 import Support from "./pages/Support";
+import NewTask from "./pages/NewTask";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
             <Route path="/affiliates" element={<Affiliates />}></Route>
             <Route path="/support" element={<Support />}></Route>
           </Route>
+          <Route path="/new-task" element={<NewTask />}></Route>
         </Routes>
       </BrowserRouter>
     </>

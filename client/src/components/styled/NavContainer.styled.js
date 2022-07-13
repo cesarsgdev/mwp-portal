@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const NavContainer = styled.section`
+  position: sticky;
+  top: 0;
   display: flex;
   flex-flow: column;
   justify-content: flex-start;

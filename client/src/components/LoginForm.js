@@ -64,6 +64,7 @@ const LoginForm = ({ activeForm, changeStatus }) => {
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
+              autoComplete="on"
             />
           </label>
           {!loginIn && <input type="submit" value="Login" />}
