@@ -20,6 +20,37 @@ const loader = keyframes`
   `;
 
 export const TaskListContainer = styled.div`
+  width: 100%;
+  height: fit-content;
+  padding: 5px 0;
+  border-radius: 5px;
+  background: #fff;
+
+  & .listHeader {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 5px;
+    width: 100%;
+    height: 75px;
+    background: #fff;
+  }
+
+  & .lhColumn {
+    height: 100%;
+  }
+
+  & .lhColumnLeft {
+    flex: 1 0 40%;
+  }
+
+  & .lhColumnRight {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px;
+    flex: 1 0 40%;
+  }
+
   & table {
     border-radius: 5px;
   }
@@ -41,17 +72,18 @@ export const TaskListContainer = styled.div`
   & tbody {
   }
   & tbody tr {
-    height: 80px;
+    height: 70px;
     background: #fff;
     cursor: pointer;
-    border-bottom: 10px solid rgba(245, 245, 245);
-    border-top: 10px solid rgba(245, 245, 245);
     transition: 0.5s;
+  }
+
+  & tbody tr:not(:last-child) {
+    border-bottom: 1px solid rgb(245, 245, 245);
   }
 
   & tbody tr:hover {
     background: rgba(250, 250, 250);
-    transform: scale(1.0075);
   }
   & td {
     text-align: center;
@@ -61,7 +93,7 @@ export const TaskListContainer = styled.div`
 
   & .taskLoader tr {
     background: rgba(220, 220, 220);
-    height: 80px;
+    height: 70px;
     width: 100%;
     animation: ${loader} 1s;
     animation-iteration-count: infinite;

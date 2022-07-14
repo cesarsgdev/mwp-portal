@@ -28,8 +28,10 @@
   --terciary-sub: #cb004f;
   --error-warning: rgb(254, 201, 201);
   --gray: rgb(228, 228, 228);
+  --gray-medium: rgb(200, 200, 200);
   --main-font: Geomanist;
   --main-bg: rgb(245, 245, 245);
+  --red: rgb(192, 0, 0);
 }
 
 * {

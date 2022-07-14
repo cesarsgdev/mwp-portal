@@ -8,6 +8,7 @@ const TaskLoader = ({ rowsNumber }) => {
   return (
     <>
       <TaskListContainer>
+        <div className="listHeader listHeaderLoader"></div>
         <table>
           <thead>
             <tr>

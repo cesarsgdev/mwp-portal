@@ -18,6 +18,12 @@ export const NavContainer = styled.section`
     height: auto;
   }
 
+  /* & a.createTask {
+    width: 80%;
+    max-width: 200px;
+    text-decoration: none;
+  } */
+
   & nav {
     width: 100%;
     user-select: none;
@@ -42,7 +48,7 @@ export const NavContainer = styled.section`
     color: #fff;
     text-decoration: none;
     transition: 0.5s;
-    padding: 15px;
+    padding: 10px 15px;
     border-left: 2.5px solid var(--main);
   }
 

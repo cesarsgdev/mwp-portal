@@ -3,7 +3,24 @@ const router = express.Router();
 const Website = require("../models/websiteModel");
 
 // Endpoint to get all websites. GET => /api/websites
-router.get("/", async (req, res) => {});
+router.get("/", async (req, res) => {
+  try {
+    const websites = await Website.find().populate({
+      path: "user_id",
+      select: "-password",
+    });
+    if (websites) {
+      res.status(200).json({ success: true, data: websites });
+      return;
+    } else {
+      res.status(200).json({ success: false, message: tasks });
+      return;
+    }
+  } catch (e) {
+    res.status(400).json({ success: false, message: `${e.message}` });
+    return;
+  }
+});
 
 // Endpoint to get a single website by :id. GET => /api/websites/:id
 router.get("/:id", async (req, res) => {

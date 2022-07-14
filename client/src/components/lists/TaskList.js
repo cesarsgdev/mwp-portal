@@ -1,10 +1,12 @@
 import { TaskListContainer } from "../styled/TaskListContainer.styled";
+import TaskListHeader from "./TaskListHeader";
 
 const TaskList = ({ data }) => {
   return (
     <>
       <section className="taskList">
         <TaskListContainer>
+          <TaskListHeader />
           <table>
             <thead>
               <tr>

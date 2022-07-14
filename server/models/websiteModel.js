@@ -87,12 +87,14 @@ websiteSchema.post("findOne", function (result) {
 });
 
 websiteSchema.post("find", function (result) {
-  const decryptedPassword = encryption.decrypt(
-    result[0].base64string,
-    result[0].password
-  );
-  delete result[0]._doc.base64string;
-  result[0].password = decryptedPassword;
+  for (website of result) {
+    const decryptedPassword = encryption.decrypt(
+      website.base64string,
+      website.password
+    );
+    delete website._doc.base64string;
+    website.password = decryptedPassword;
+  }
 });
 
 const websiteModel = mongoose.model("websites", websiteSchema);

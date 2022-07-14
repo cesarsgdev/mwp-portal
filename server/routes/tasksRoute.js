@@ -18,6 +18,7 @@ router.get("/", async (req, res) => {
     }
   } catch (e) {
     res.status(400).json({ success: false, message: `${e.message}` });
+    return;
   }
 });
 
