@@ -7,6 +7,8 @@ import WebsitesLoader from "../components/loaders/WebsitesLoader";
 import WebsitesListHeader from "../components/lists/WebsitesListHeader";
 import { Overlay } from "../components/styled/Overlay.styled";
 import AddWebsite from "../components/forms/website/AddWebsite";
+import { CSSTransition } from "react-transition-group";
+import "../animations.css";
 
 const Websites = () => {
   const [websites, setWebsites] = useState();
@@ -41,7 +43,7 @@ const Websites = () => {
       return {
         ...form,
         [e.target.name]:
-          e.target.value || e.target.getAttribute("data-category"),
+          e.target.value || e.target.getAttribute("data-category") || "",
       };
     });
     console.log(form);
@@ -53,14 +55,25 @@ const Websites = () => {
 
   return (
     <>
-      {overlay && (
+      <CSSTransition
+        in={overlay}
+        timeout={{
+          appear: 500,
+          enter: 500,
+          exit: 500,
+        }}
+        classNames="overlay"
+        mountOnEnter={true}
+        unmountOnExit={true}
+      >
         <Overlay className="overlay">
           <AddWebsite
             formState={form}
             formChange={handleFormChange}
+            closeOverlay={handleOverlay}
           ></AddWebsite>
         </Overlay>
-      )}
+      </CSSTransition>
       <ContentContainer>
         <SectionTitle title="Websites" />
 

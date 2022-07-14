@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const FormWebsiteContainer = styled.form`
+  position: relative;
   display: flex;
   flex-flow: column wrap;
   gap: 25px;
@@ -68,6 +69,7 @@ export const FormWebsiteContainer = styled.form`
     color: #fff;
     transition: 0.5s;
     border-radius: 5px;
+    align-self: flex-end;
   }
 
   & input[type="submit"]:hover {
@@ -84,5 +86,14 @@ export const FormWebsiteContainer = styled.form`
 
   & .websiteCategory h2 {
     flex: 1 0 100%;
+  }
+
+  & svg.closeWebsiteForm {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 36px;
+    color: var(--main-sub);
+    cursor: pointer;
   }
 `;

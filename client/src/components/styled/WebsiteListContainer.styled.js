@@ -2,7 +2,7 @@ import styled, { keyframes } from "styled-components";
 
 const loader = keyframes`
     0% {
-      background: rgba(225, 225, 225);
+      background: rgba(200, 200, 200);
   }
 
   33% {
@@ -15,7 +15,7 @@ const loader = keyframes`
   }
 
   100% {
-      background: rgba(225, 225, 225);
+      background: rgba(200, 200, 200);
   }
   `;
 

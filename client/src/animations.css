@@ -16,3 +16,18 @@
   transform: translateY(100px);
   transition: 200ms ease-in;
 }
+
+.overlay-enter {
+  opacity: 0;
+}
+.overlay-enter-active {
+  opacity: 1;
+  transition: 500ms ease-in;
+}
+.overlay-exit {
+  opacity: 1;
+}
+.overlay-exit-active {
+  opacity: 0;
+  transition: 500ms ease-in;
+}

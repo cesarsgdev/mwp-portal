@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { NewTaskContainer } from "../components/styled/NewTaskContainer.styled";
 import { useCheckAuth } from "../hooks/useCheckAuth";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { IoChevronBack } from "react-icons/io5";
 import Categories from "../components/forms/task/Categories";
 import Details from "../components/forms/task/Details";
@@ -22,6 +22,7 @@ const NewTask = () => {
     website: "",
     instructions: "",
   });
+  const navigate = useNavigate();
 
   useTitle();
 
@@ -86,7 +87,7 @@ const NewTask = () => {
         <div
           className="exitNewTask"
           onClick={(e) => {
-            setProgress((progress) => progress + 25);
+            navigate(-1);
           }}
         >
           <IoChevronBack />

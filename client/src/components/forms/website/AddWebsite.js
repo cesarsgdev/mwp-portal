@@ -1,13 +1,16 @@
 import { FormWebsiteContainer } from "../../styled/FormWebsiteContainer.styled";
 import { WebsiteCategoryButton } from "../../styled/WebsiteCategoryButton.styled";
 import { SiWoo, SiWordpress } from "react-icons/si";
-const AddWebsite = ({ formState, formChange }) => {
+import { AiFillCloseSquare } from "react-icons/ai";
+
+const AddWebsite = ({ formState, formChange, closeOverlay }) => {
   return (
     <FormWebsiteContainer
       onSubmit={(e) => {
         e.preventDefault();
       }}
     >
+      <AiFillCloseSquare onClick={closeOverlay} className="closeWebsiteForm" />
       <h1>Add website</h1>
       <label>
         <h2>URL</h2>
@@ -52,6 +55,7 @@ const AddWebsite = ({ formState, formChange }) => {
           type="text"
           name="user"
           value={formState.user}
+          placeholder="Ex: admin"
           onChange={(e) => {
             formChange(e);
           }}
@@ -72,20 +76,24 @@ const AddWebsite = ({ formState, formChange }) => {
           }}
         />
       </label>
-      <label>
-        <h2>Admin URL</h2>
-        <span>
-          Only if you log-in from somewhere other than mysite.com/wp-admin
-        </span>
-        <input
-          type="password"
-          name="password"
-          value={formState.password}
-          onChange={(e) => {
-            formChange(e);
-          }}
-        />
-      </label>
+      {formState.url.length > 1 && formState?.url.includes(".com") && (
+        <label>
+          <h2>Admin URL</h2>
+          <span>
+            Only if you log-in from somewhere other than https://{formState.url}
+            /wp-admin
+          </span>
+          <input
+            type="password"
+            name="password"
+            value={formState.password}
+            placeholder={`Ex:  https://${formState.url}/login`}
+            onChange={(e) => {
+              formChange(e);
+            }}
+          />
+        </label>
+      )}
       <input type="submit" value="Add website" />
     </FormWebsiteContainer>
   );
