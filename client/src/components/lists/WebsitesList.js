@@ -12,7 +12,7 @@ const WebsitesList = ({ data, itemsNumber }) => {
     <WebsiteListContainer>
       <ReactTooltip
         backgroundColor="var(--main)"
-        delayShow={500}
+        delayShow={250}
         className="websiteItemTip"
       />
 
@@ -32,8 +32,8 @@ const WebsitesList = ({ data, itemsNumber }) => {
               />
             </h3>
             <div className="websiteItemControls">
-              <FiEdit data-tip="Edit website" />
-              <FiDelete className="deleteIcon" data-tip="Delete website" />
+              <FiEdit data-tip="Edit" />
+              <FiDelete className="deleteIcon" data-tip="Delete" />
             </div>
           </div>
         );

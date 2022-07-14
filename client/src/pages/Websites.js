@@ -4,9 +4,20 @@ import SectionTitle from "../components/SectionTitle";
 import { useTitle } from "../hooks/useTitle";
 import WebsitesList from "../components/lists/WebsitesList";
 import WebsitesLoader from "../components/loaders/WebsitesLoader";
+import WebsitesListHeader from "../components/lists/WebsitesListHeader";
+import { Overlay } from "../components/styled/Overlay.styled";
+import AddWebsite from "../components/forms/website/AddWebsite";
 
 const Websites = () => {
   const [websites, setWebsites] = useState();
+  const [mainLoad, setMainLoad] = useState(true);
+  const [overlay, setOverlay] = useState(false);
+  const [form, setForm] = useState({
+    url: "",
+    category: "wordpress",
+    user: "",
+    password: "",
+  });
   useTitle();
 
   useEffect(() => {
@@ -15,17 +26,46 @@ const Websites = () => {
       .then((data) => {
         console.log(data);
         setWebsites(data.data);
+        if (mainLoad) {
+          setMainLoad(false);
+        }
       })
       .catch((e) => {
         console.log(e);
       });
   }, []);
 
+  const handleFormChange = (e) => {
+    console.log(e.target.getAttribute("data-category"));
+    setForm((currentForm) => {
+      return {
+        ...form,
+        [e.target.name]:
+          e.target.value || e.target.getAttribute("data-category"),
+      };
+    });
+    console.log(form);
+  };
+
+  const handleOverlay = () => {
+    setOverlay(!overlay);
+  };
+
   return (
     <>
+      {overlay && (
+        <Overlay className="overlay">
+          <AddWebsite
+            formState={form}
+            formChange={handleFormChange}
+          ></AddWebsite>
+        </Overlay>
+      )}
       <ContentContainer>
         <SectionTitle title="Websites" />
-        {!websites && <WebsitesLoader itemsNumber={24} />}
+
+        {!mainLoad && <WebsitesListHeader showOverlay={handleOverlay} />}
+        {!websites && <WebsitesLoader itemsNumber={24} isMainLoad={mainLoad} />}
         {websites && <WebsitesList data={websites} />}
       </ContentContainer>
     </>

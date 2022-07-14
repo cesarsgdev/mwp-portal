@@ -57,7 +57,7 @@ export const WebsiteListContainer = styled.section`
   }
 
   & .websiteItem h3 svg.wordPressIcon {
-    font-size: 24px;
+    font-size: 22px;
   }
 
   & .websiteItem h3 svg.wooIcon {
