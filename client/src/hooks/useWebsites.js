@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useAPI } from "./useAPI";
 
 export const useWebsites = () => {
   const [websites, setWebsites] = useState();
@@ -11,20 +12,20 @@ export const useWebsites = () => {
     password: "",
   });
 
+  const Websites = useAPI();
+  const [query, setQuery] = useState({ category: "", url: "" });
+
   useEffect(() => {
-    fetch("/api/websites")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setWebsites(data.data);
-        if (mainLoad) {
-          setMainLoad(false);
-        }
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, []);
+    const loadWebsites = async (params) => {
+      const websites = await Websites.getWebsites(params);
+      setWebsites(websites);
+      if (mainLoad && websites) {
+        setMainLoad(false);
+      }
+    };
+
+    loadWebsites(query);
+  }, [query]);
 
   const handleFormChange = (e) => {
     console.log(e.target.getAttribute("data-category"));
