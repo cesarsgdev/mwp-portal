@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useWebsites } from "../hooks/useWebsites";
 import { ContentContainer } from "../components/styled/ContentContainer.styled";
 import SectionTitle from "../components/SectionTitle";
 import { useTitle } from "../hooks/useTitle";
@@ -11,47 +12,10 @@ import { CSSTransition } from "react-transition-group";
 import "../animations.css";
 
 const Websites = () => {
-  const [websites, setWebsites] = useState();
-  const [mainLoad, setMainLoad] = useState(true);
-  const [overlay, setOverlay] = useState(false);
-  const [form, setForm] = useState({
-    url: "",
-    category: "wordpress",
-    user: "",
-    password: "",
-  });
+  const { websites, form, mainLoad, overlay, handleFormChange, handleOverlay } =
+    useWebsites();
+
   useTitle();
-
-  useEffect(() => {
-    fetch("/api/websites")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setWebsites(data.data);
-        if (mainLoad) {
-          setMainLoad(false);
-        }
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, []);
-
-  const handleFormChange = (e) => {
-    console.log(e.target.getAttribute("data-category"));
-    setForm((currentForm) => {
-      return {
-        ...form,
-        [e.target.name]:
-          e.target.value || e.target.getAttribute("data-category") || "",
-      };
-    });
-    console.log(form);
-  };
-
-  const handleOverlay = () => {
-    setOverlay(!overlay);
-  };
 
   return (
     <>

@@ -4,11 +4,23 @@ const Website = require("../models/websiteModel");
 
 // Endpoint to get all websites. GET => /api/websites
 router.get("/", async (req, res) => {
+  for (let [key, value] of Object.entries(req.query)) {
+    if (!value || value === `""`) {
+      delete req.query[key];
+    }
+    if (value.includes("/")) {
+      const newValue = value.split("/");
+      req.query[key] = new RegExp(newValue[1], "i");
+    }
+  }
+
   try {
-    const websites = await Website.find().populate({
-      path: "user_id",
-      select: "-password",
-    });
+    const websites = await Website.find({ ...req.query })
+      .populate({
+        path: "user_id",
+        select: "-password",
+      })
+      .sort({ url: 1 });
     if (websites) {
       res.status(200).json({ success: true, data: websites });
       return;
