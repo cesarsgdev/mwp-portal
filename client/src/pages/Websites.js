@@ -12,8 +12,15 @@ import { CSSTransition } from "react-transition-group";
 import "../animations.css";
 
 const Websites = () => {
-  const { websites, form, mainLoad, overlay, handleFormChange, handleOverlay } =
-    useWebsites();
+  const {
+    websites,
+    form,
+    mainLoad,
+    overlay,
+    handleFormChange,
+    handleOverlay,
+    handleQuery,
+  } = useWebsites();
 
   useTitle();
 
@@ -41,7 +48,12 @@ const Websites = () => {
       <ContentContainer>
         <SectionTitle title="Websites" />
 
-        {!mainLoad && <WebsitesListHeader showOverlay={handleOverlay} />}
+        {!mainLoad && (
+          <WebsitesListHeader
+            showOverlay={handleOverlay}
+            searchAction={handleQuery}
+          />
+        )}
         {!websites && <WebsitesLoader itemsNumber={24} isMainLoad={mainLoad} />}
         {websites && <WebsitesList data={websites} />}
       </ContentContainer>

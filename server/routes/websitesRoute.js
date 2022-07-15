@@ -8,9 +8,8 @@ router.get("/", async (req, res) => {
     if (!value || value === `""`) {
       delete req.query[key];
     }
-    if (value.includes("/")) {
-      const newValue = value.split("/");
-      req.query[key] = new RegExp(newValue[1], "i");
+    if (key === "url") {
+      req.query[key] = new RegExp(value, "i");
     }
   }
 

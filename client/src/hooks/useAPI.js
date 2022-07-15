@@ -15,7 +15,7 @@ export const useAPI = () => {
         query = Object.keys(params).map((key) => `${key}=${params[key]}`);
         query = query.join("&");
       }
-
+      console.log(query);
       return query;
     }
 
@@ -29,13 +29,12 @@ export const useAPI = () => {
     }
 
     async getWebsites(filters) {
-      console.log(this.token);
       const websites = await fetch(
         `${this.baseUrl}/websites?${this.createQuery(filters)}`,
         this.options()
       );
       const data = await websites.json();
-
+      console.log(data);
       return data.data;
     }
   }

@@ -43,5 +43,19 @@ export const useWebsites = () => {
     setOverlay(!overlay);
   };
 
-  return { websites, form, mainLoad, overlay, handleFormChange, handleOverlay };
+  const handleQuery = (e) => {
+    setQuery((oldQuery) => {
+      return { ...query, [e.target.name]: e.target.value || "" };
+    });
+  };
+
+  return {
+    websites,
+    form,
+    mainLoad,
+    overlay,
+    handleFormChange,
+    handleOverlay,
+    handleQuery,
+  };
 };

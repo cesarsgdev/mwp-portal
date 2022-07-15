@@ -21,13 +21,41 @@ const loader = keyframes`
 
 export const WebsteListHeaderContainer = styled.section`
   display: flex;
-  justify-content: flex-end;
   align-items: center;
-
   width: 100%;
   height: fit-content;
+  gap: 10px;
 
-  & div {
+  & div.websiteHeaderColumn {
+    display: flex;
+    flex-flow: row nowrap;
+    height: 100%;
+    flex: 1 0 40%;
+  }
+
+  & input[type="text"] {
+    font-family: var(--main-font);
+    font-size: 16px;
+    width: 200px;
+    padding: 0 10px;
+    border: 2px solid var(--gray-medium);
+    border-radius: 5px;
+  }
+
+  & input[type="text"]:focus {
+    outline: none;
+    border-color: var(--main-sub);
+  }
+
+  & div.whcL {
+    justify-content: flex-start;
+  }
+
+  & div.whcR {
+    justify-content: flex-end;
+  }
+
+  & div.loaderHeaderButton {
     width: 200px;
     height: 40px;
     border-radius: 5px;

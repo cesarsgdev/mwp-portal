@@ -11,7 +11,12 @@ const WebsitesLoader = ({ itemsNumber, isMainLoad }) => {
     <>
       {isMainLoad && (
         <WebsteListHeaderContainer>
-          <div></div>
+          <div className="websiteHeaderColumn whcL">
+            <div className="loaderHeaderButton"></div>
+          </div>
+          <div className="websiteHeaderColumn whcR">
+            <div className="loaderHeaderButton"></div>
+          </div>
         </WebsteListHeaderContainer>
       )}
       <WebsiteListContainer>
