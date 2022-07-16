@@ -15,7 +15,6 @@ export const useAPI = () => {
         query = Object.keys(params).map((key) => `${key}=${params[key]}`);
         query = query.join("&");
       }
-      console.log(query);
       return query;
     }
 
@@ -34,7 +33,6 @@ export const useAPI = () => {
         this.options()
       );
       const data = await websites.json();
-      console.log(data);
       return data.data;
     }
   }
