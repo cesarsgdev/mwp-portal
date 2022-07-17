@@ -3,29 +3,20 @@ import { Button } from "../styled/Button.styled";
 import { TbWorld } from "react-icons/tb";
 import { WebsteListHeaderContainer } from "../styled/WebsiteListHeaderContainer";
 import { IoCaretDownOutline, IoCaretUpOutline } from "react-icons/io5";
+import FilterSelect from "../FilterSelect";
+
 const WebsitesListHeader = ({ showOverlay, searchAction }) => {
   const [search, setSearch] = useState("");
-  const [filterCategory, setFilterCategory] = useState(false);
-
-  const categoryButton = useRef();
+  const filterOptions = {
+    name: "category",
+    options: ["All", "WordPress", "WooCommerce"],
+  };
 
   const handleSearchChange = (e) => {
     setSearch((prevSearch) => e.target.value);
     searchAction(e);
   };
 
-  const handleFilterCategory = (e) => {
-    setFilterCategory(!filterCategory);
-  };
-
-  const handleChangeFilter = (e) => {
-    const category = e.target.getAttribute("category");
-    const filter = e.target.getAttribute("filter");
-    categoryButton.current.childNodes[0].textContent = category;
-    e.target.value = filter;
-    setFilterCategory(!filterCategory);
-    searchAction(e);
-  };
   return (
     <>
       <WebsteListHeaderContainer>
@@ -37,44 +28,10 @@ const WebsitesListHeader = ({ showOverlay, searchAction }) => {
             placeholder="Search websites..."
             onChange={handleSearchChange}
           />
-          <div className="websiteFilterContainer">
-            <button
-              ref={categoryButton}
-              className="websiteFilterOptions"
-              onClick={handleFilterCategory}
-            >
-              All{" "}
-              {filterCategory ? <IoCaretUpOutline /> : <IoCaretDownOutline />}
-            </button>
-            {filterCategory && (
-              <div className="filterOptions">
-                <button
-                  name="category"
-                  category="All"
-                  filter=""
-                  onClick={handleChangeFilter}
-                >
-                  All
-                </button>
-                <button
-                  name="category"
-                  category="WordPress"
-                  filter="wordpress"
-                  onClick={handleChangeFilter}
-                >
-                  WordPress
-                </button>
-                <button
-                  name="category"
-                  category="WooCommerce"
-                  filter="woocommerce"
-                  onClick={handleChangeFilter}
-                >
-                  WooCommerce
-                </button>
-              </div>
-            )}
-          </div>
+          <FilterSelect
+            searchAction={searchAction}
+            filterOptions={filterOptions}
+          />
         </div>
 
         <div className="websiteHeaderColumn whcR">

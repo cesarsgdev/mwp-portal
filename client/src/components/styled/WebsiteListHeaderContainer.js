@@ -21,6 +21,8 @@ const loader = keyframes`
 
 export const WebsteListHeaderContainer = styled.section`
   background: var(--main);
+  background: ${({ loading }) =>
+    loading ? "var(--gray-medium)" : "var(--main)"};
   padding: 10px;
   border-radius: 5px;
   display: flex;
