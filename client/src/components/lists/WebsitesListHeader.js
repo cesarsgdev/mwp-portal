@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { Button } from "../styled/Button.styled";
 import { TbWorld } from "react-icons/tb";
 import { WebsteListHeaderContainer } from "../styled/WebsiteListHeaderContainer";
-import { IoCaretDownOutline } from "react-icons/io5";
+import { IoCaretDownOutline, IoCaretUpOutline } from "react-icons/io5";
 const WebsitesListHeader = ({ showOverlay, searchAction }) => {
   const [search, setSearch] = useState("");
   const [filterCategory, setFilterCategory] = useState(false);
@@ -43,7 +43,8 @@ const WebsitesListHeader = ({ showOverlay, searchAction }) => {
               className="websiteFilterOptions"
               onClick={handleFilterCategory}
             >
-              All <IoCaretDownOutline />
+              All{" "}
+              {filterCategory ? <IoCaretUpOutline /> : <IoCaretDownOutline />}
             </button>
             {filterCategory && (
               <div className="filterOptions">
