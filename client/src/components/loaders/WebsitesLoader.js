@@ -10,7 +10,7 @@ const WebsitesLoader = ({ itemsNumber, isMainLoad }) => {
   return (
     <>
       {isMainLoad && (
-        <WebsteListHeaderContainer loading>
+        <WebsteListHeaderContainer isLoader>
           <div className="websiteHeaderColumn whcL">
             <div className="loaderHeaderButton"></div>
             <div className="loaderHeaderButton"></div>

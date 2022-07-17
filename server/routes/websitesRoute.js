@@ -1,53 +1,20 @@
 const express = require("express");
 const router = express.Router();
 const Website = require("../models/websiteModel");
+const verifyToken = require("../middlewares/verifyToken");
+const isAdmin = require("../middlewares/isAdmin");
+const isDev = require("../middlewares/isDev");
+const websites = require("../handlers/websites");
+
+router.use(verifyToken);
+router.use(isAdmin);
+router.use(isDev);
 
 // Endpoint to get all websites. GET => /api/websites
-router.get("/", async (req, res) => {
-  for (let [key, value] of Object.entries(req.query)) {
-    if (!value || value === `""`) {
-      delete req.query[key];
-    }
-    if (key === "url") {
-      req.query[key] = new RegExp(value, "i");
-    }
-  }
-
-  try {
-    const websites = await Website.find({ ...req.query })
-      .populate({
-        path: "user_id",
-        select: "-password",
-      })
-      .sort({ url: 1 });
-    if (websites) {
-      res.status(200).json({ success: true, data: websites });
-      return;
-    } else {
-      res.status(200).json({ success: false, message: tasks });
-      return;
-    }
-  } catch (e) {
-    res.status(400).json({ success: false, message: `${e.message}` });
-    return;
-  }
-});
+router.get("/", websites.getAllWebsites);
 
 // Endpoint to get a single website by :id. GET => /api/websites/:id
-router.get("/:id", async (req, res) => {
-  try {
-    const website = await Website.findById(req.params.id);
-    if (website) {
-      res.status(200).json({ success: true, data: website });
-      return;
-    } else {
-      res.status(200).json({ success: false, message: website });
-      return;
-    }
-  } catch (e) {
-    res.status(400).json({ success: false, message: `${e.message}` });
-  }
-});
+router.get("/:id", websites.getWebsiteById);
 
 // Endpoint to create a new website. POST => /api/websites/
 router.post("/", async (req, res) => {

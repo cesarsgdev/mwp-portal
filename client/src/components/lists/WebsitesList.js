@@ -18,7 +18,11 @@ const WebsitesList = ({ data, itemsNumber }) => {
 
       {data.map((website, i) => {
         return (
-          <div key={i} className="websiteItem websiteItemActive">
+          <div
+            id={website._id}
+            key={i}
+            className="websiteItem websiteItemActive"
+          >
             <h3>
               {website.category === "wordpress" ? (
                 <SiWordpress className="wordPressIcon" />
