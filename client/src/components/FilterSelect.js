@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { IoCaretDownOutline, IoCaretUpOutline } from "react-icons/io5";
+import { AiOutlineSortAscending } from "react-icons/ai";
 
 const FilterSelect = ({ searchAction, filterOptions }) => {
   const [filterCategory, setFilterCategory] = useState(false);
@@ -26,20 +27,22 @@ const FilterSelect = ({ searchAction, filterOptions }) => {
         className="websiteFilterOptions"
         onClick={handleFilterCategory}
       >
-        {filterOptions.options[0]}{" "}
+        {filterOptions.options[0].label}{" "}
         {filterCategory ? <IoCaretUpOutline /> : <IoCaretDownOutline />}
       </button>
       {filterCategory && (
         <div className="filterOptions">
-          {filterOptions.options.map((option) => {
+          <span className="filterPlaceholder">{filterOptions.placeholder}</span>
+          {filterOptions.options.map((option, i) => {
             return (
               <button
+                key={i}
                 name={filterOptions.name}
-                category={option}
-                filter={option === "All" ? "" : option.toLowerCase()}
+                category={option.label}
+                filter={option.value}
                 onClick={handleChangeFilter}
               >
-                {option}
+                {option.label}
               </button>
             );
           })}

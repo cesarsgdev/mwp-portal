@@ -13,11 +13,13 @@ export const useWebsites = () => {
   });
 
   const Websites = useAPI();
-  const [query, setQuery] = useState({ category: "", url: "" });
+  const [query, setQuery] = useState({ category: "", url: "", sort: "url,1" });
 
   useEffect(() => {
+    console.log(query);
     const loadWebsites = async (params) => {
       const websites = await Websites.getWebsites(params);
+      console.log(websites);
       setWebsites(websites);
       if (mainLoad && websites) {
         setMainLoad(false);
@@ -45,7 +47,7 @@ export const useWebsites = () => {
 
   const handleQuery = (e) => {
     setQuery((oldQuery) => {
-      return { ...query, [e.target.name]: e.target.value || "" };
+      return { ...oldQuery, [e.target.name]: e.target.value || "" };
     });
   };
 

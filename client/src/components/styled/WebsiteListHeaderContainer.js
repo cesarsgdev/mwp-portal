@@ -34,15 +34,21 @@ export const WebsteListHeaderContainer = styled.section`
   & div.websiteHeaderColumn {
     display: flex;
     flex-flow: row nowrap;
+    align-items: center;
     height: 100%;
     gap: 10px;
     flex: 1 0 40%;
   }
 
+  & .filterSortIcons {
+    font-size: 24px;
+    color: var(--main-sub);
+  }
   & input[type="text"] {
     font-family: var(--main-font);
     font-size: 16px;
     width: 200px;
+    height: 100%;
     padding: 0 10px;
     border: 2px solid var(--gray-medium);
     border-radius: 5px;
@@ -110,13 +116,14 @@ export const WebsteListHeaderContainer = styled.section`
     width: 100%;
     height: fit-content;
     min-height: 50px;
-    max-height: 150px;
     background: #fff;
     border-radius: 5px;
     box-shadow: 3px 3px 10px var(--gray);
+    overflow: scroll;
   }
 
-  & .filterOptions button {
+  & .filterOptions button,
+  .filterPlaceholder {
     display: flex;
     font-family: var(--main), sans-serif;
     font-size: 16px;
@@ -128,6 +135,10 @@ export const WebsteListHeaderContainer = styled.section`
     background: transparent;
     transition: 0.5s;
     border: none;
+  }
+
+  & .filterPlaceholder {
+    color: var(--gray-medium);
   }
 
   & .filterOptions button:hover {

@@ -8,6 +8,11 @@ const getAllWebsites = async (req, res, role = "client") => {
     if (key === "url") {
       req.query[key] = new RegExp(value, "i");
     }
+
+    if (key === "sort") {
+      const [sort, by] = value.split(",");
+      req.query.sort = { [sort]: by };
+    }
   }
 
   if (req.body.userRole !== "admin") {
@@ -19,7 +24,7 @@ const getAllWebsites = async (req, res, role = "client") => {
         path: "user_id",
         select: "-password",
       })
-      .sort({ url: 1 });
+      .sort(req.query.sort);
     if (websites) {
       res.status(200).json({ success: true, data: websites });
       return;

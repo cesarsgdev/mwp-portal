@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useWebsites } from "../hooks/useWebsites";
 import { ContentContainer } from "../components/styled/ContentContainer.styled";
 import SectionTitle from "../components/SectionTitle";
