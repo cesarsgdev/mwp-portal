@@ -28,12 +28,12 @@ const WebsitesListHeader = ({ showOverlay, searchAction }) => {
     name: "sort",
     placeholder: "Sort by",
     options: [
-      { label: "URL (asc)", value: ["url", "asc"] },
-      { label: "URL (desc)", value: ["url", "desc"] },
-      { label: "Date created (asc)", value: ["createdAt", "asc"] },
-      { label: "Date created (desc)", value: ["createdAt", "desc"] },
-      { label: "Date modified (asc)", value: ["updatedAt", "asc"] },
-      { label: "Date modified (desc)", value: ["updatedAt", "desc"] },
+      { label: "URL \u2191", value: ["url", "asc"] },
+      { label: "URL \u2193", value: ["url", "desc"] },
+      { label: "Date created \u2191", value: ["createdAt", "asc"] },
+      { label: "Date created \u2193", value: ["createdAt", "desc"] },
+      { label: "Date modified \u2191", value: ["updatedAt", "asc"] },
+      { label: "Date modified \u2193", value: ["updatedAt", "desc"] },
     ],
   };
 

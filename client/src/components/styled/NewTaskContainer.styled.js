@@ -222,4 +222,40 @@ export const NewTaskContainer = styled.main`
   .formWebsiteList button:hover svg {
     color: rgba(255, 255, 255, 0.5);
   }
+
+  & .chosenWebsite {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    font-family: var(--main-font), sans-serif;
+    font-size: 18px;
+    padding: 0px;
+    height: 40px;
+    margin-top: 10px;
+    /* background: #fff;
+    border: 2px solid lightgray;
+    border-radius: 5px; */
+  }
+
+  & .chosenWebsite > span {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--main);
+    font-size: 18px;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+
+  & .chosenWebsite .removeWebsite {
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  & .chosenWebsite .removeWebsite:hover {
+    cursor: pointer;
+  }
 `;

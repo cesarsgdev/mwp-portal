@@ -5,6 +5,7 @@ import { useWebsites } from "../../../hooks/useWebsites";
 const Details = ({ formState, changeForm, nextPage, searchWebsites }) => {
   const { websites, handleQuery } = useWebsites();
   const [websiteOptions, setWebsiteOptions] = useState(false);
+  const [chosenWebsite, setChosenWebsite] = useState("");
 
   const urlField = useRef();
 
@@ -18,6 +19,11 @@ const Details = ({ formState, changeForm, nextPage, searchWebsites }) => {
   const handleWebsiteOptions = (e) => {
     setWebsiteOptions(!websiteOptions);
     urlField.current.blur();
+    setChosenWebsite(e.target.value);
+  };
+
+  const handleDeleteChosenWebsite = (e) => {
+    setChosenWebsite("");
   };
   return (
     <div className="animationWrapper">
@@ -39,20 +45,33 @@ const Details = ({ formState, changeForm, nextPage, searchWebsites }) => {
       <label>
         <h2>Website</h2>
         <span>The website where the task will be completed.</span>
-        <input
-          ref={urlField}
-          type="text"
-          value={formState.url}
-          name="url"
-          autoComplete="off"
-          onChange={handleChange}
-          onFocus={(e) => {
-            setWebsiteOptions(!websiteOptions);
-          }}
-          onBlur={(e) => {
-            setWebsiteOptions(!websiteOptions);
-          }}
-        />
+        {chosenWebsite && (
+          <div className="chosenWebsite">
+            <span>
+              {chosenWebsite}
+              <span
+                className="removeWebsite"
+                onClick={handleDeleteChosenWebsite}
+              >
+                &times;
+              </span>
+            </span>
+          </div>
+        )}
+        {!chosenWebsite && (
+          <input
+            ref={urlField}
+            type="text"
+            value={formState.url}
+            name="url"
+            autoComplete="off"
+            onChange={handleChange}
+            onFocus={(e) => {
+              setWebsiteOptions(!websiteOptions);
+            }}
+            onBlur={handleWebsiteOptions}
+          />
+        )}
         {websiteOptions && (
           <WebsiteFieldOptions
             websites={websites}
