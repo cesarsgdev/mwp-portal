@@ -1,6 +1,23 @@
-const Details = ({ formState, changeForm, nextPage }) => {
+import { useState, useRef } from "react";
+import WebsiteFieldOptions from "./WebsiteFieldOptions";
+import { useWebsites } from "../../../hooks/useWebsites";
+
+const Details = ({ formState, changeForm, nextPage, searchWebsites }) => {
+  const { websites, handleQuery } = useWebsites();
+  const [websiteOptions, setWebsiteOptions] = useState(false);
+
+  const urlField = useRef();
+
   const handleChange = (e) => {
     changeForm(e);
+    if (e.target.name === "url") {
+      handleQuery(e);
+    }
+  };
+
+  const handleWebsiteOptions = (e) => {
+    setWebsiteOptions(!websiteOptions);
+    urlField.current.blur();
   };
   return (
     <div className="animationWrapper">
@@ -15,6 +32,7 @@ const Details = ({ formState, changeForm, nextPage }) => {
           type="text"
           value={formState.name}
           name="name"
+          autoComplete="off"
           onChange={handleChange}
         />
       </label>
@@ -22,11 +40,26 @@ const Details = ({ formState, changeForm, nextPage }) => {
         <h2>Website</h2>
         <span>The website where the task will be completed.</span>
         <input
+          ref={urlField}
           type="text"
-          value={formState.website}
-          name="website"
+          value={formState.url}
+          name="url"
+          autoComplete="off"
           onChange={handleChange}
+          onFocus={(e) => {
+            setWebsiteOptions(!websiteOptions);
+          }}
+          onBlur={(e) => {
+            setWebsiteOptions(!websiteOptions);
+          }}
         />
+        {websiteOptions && (
+          <WebsiteFieldOptions
+            websites={websites}
+            changeForm={changeForm}
+            handleWebsiteOptions={handleWebsiteOptions}
+          />
+        )}
       </label>
       <label>
         <h2>Instructions</h2>

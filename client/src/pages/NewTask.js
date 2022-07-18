@@ -19,7 +19,7 @@ const NewTask = () => {
   const [form, setForm] = useState({
     category: "",
     name: "",
-    website: "",
+    url: "",
     instructions: "",
   });
   const navigate = useNavigate();
@@ -50,6 +50,7 @@ const NewTask = () => {
   };
 
   const handleFormChange = (e) => {
+    console.log(e.target.value);
     setForm((form) => {
       return {
         ...form,
@@ -57,6 +58,7 @@ const NewTask = () => {
           e.target.value || e.target.getAttribute("categoryname") || "",
       };
     });
+    console.log(form);
   };
 
   const handleEdit = (e) => {

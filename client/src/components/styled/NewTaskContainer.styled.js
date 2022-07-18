@@ -87,6 +87,7 @@ export const NewTaskContainer = styled.main`
   }
 
   & label {
+    position: relative;
     width: 100%;
     display: flex;
     flex-flow: column;
@@ -98,7 +99,7 @@ export const NewTaskContainer = styled.main`
     color: rgba(75, 75, 75, 1);
   }
 
-  & label span {
+  & label > span {
     color: rgba(150, 150, 150, 1);
   }
 
@@ -113,7 +114,7 @@ export const NewTaskContainer = styled.main`
   }
 
   & label input[type="text"] {
-    width: 75%;
+    width: 50%;
     height: 40px;
   }
 
@@ -154,5 +155,71 @@ export const NewTaskContainer = styled.main`
   & .animationWrapper button.btnNext:hover {
     background: var(--secondary);
     cursor: pointer;
+  }
+
+  & .formWebsiteList {
+    display: flex;
+    flex-flow: column nowrap;
+    position: absolute;
+    width: 50%;
+    height: fit-content;
+    max-height: 200px;
+    overflow: scroll;
+    z-index: 1000;
+    top: 100%;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 3px 3px 10px var(--gray);
+    transition: 0.5s;
+  }
+
+  & .formWebsiteList button,
+  .formWebsiteList > span {
+    font-family: var(--main-font);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    flex: 1 0 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+    padding: 0 10px;
+    border: 0;
+    transition: 0.5s;
+  }
+
+  .formWebsiteList div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    pointer-events: none;
+  }
+
+  .formWebsiteList div svg {
+    color: var(--gray-medium);
+    font-size: 16px;
+    pointer-events: none;
+  }
+
+  & .formWebsiteList > span {
+    color: var(--gray-medium);
+    pointer-events: none;
+  }
+
+  & .formWebsiteList button:hover {
+    cursor: pointer;
+    background: var(--main);
+    color: #fff;
+  }
+
+  & .formWebsiteList button span {
+    font-size: 14px;
+    color: var(--gray-medium);
+  }
+
+  & .formWebsiteList button:hover span,
+  .formWebsiteList button:hover svg {
+    color: rgba(255, 255, 255, 0.5);
   }
 `;
