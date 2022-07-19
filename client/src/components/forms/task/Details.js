@@ -1,8 +1,8 @@
-import { useState, useRef, useContext } from "react";
+import { useRef, useContext } from "react";
 import WebsiteFieldOptions from "./WebsiteFieldOptions";
 import { NewTaskContext } from "./context/NewTaskContext";
 
-const Details = ({ searchWebsites }) => {
+const Details = () => {
   const context = useContext(NewTaskContext);
 
   const urlField = useRef();
@@ -23,11 +23,7 @@ const Details = ({ searchWebsites }) => {
           Something descriptive like "Create new site" or "Change the color of
           my header".
         </span>
-        {context.formErrors.name.error && (
-          <span className="taskFormError">
-            {context.formErrors.name.message}
-          </span>
-        )}
+
         <input
           type="text"
           value={context.form.name}
@@ -41,11 +37,6 @@ const Details = ({ searchWebsites }) => {
         <label>
           <h2>Website</h2>
           <span>The website where the task will be completed.</span>
-          {context.formErrors.url.error && (
-            <span className="taskFormError">
-              {context.formErrors.url.message}
-            </span>
-          )}
           {context.chosenWebsite && (
             <div className="chosenWebsite">
               <span>

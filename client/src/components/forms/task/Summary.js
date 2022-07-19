@@ -1,15 +1,19 @@
+import { useContext } from "react";
+import { NewTaskContext } from "./context/NewTaskContext";
+
 const Summary = ({ formState, editFunction }) => {
+  const context = useContext(NewTaskContext);
   return (
     <div className="animationWrapper">
       <h1>Your task summary...</h1>
-      <span>{formState.category}</span>
-      <span>{formState.name}</span>
-      <span>{formState.url}</span>
-      <span>{formState.instructions}</span>
+      <span>{context.form.category}</span>
+      <span>{context.form.name}</span>
+      <span>{context.form.url}</span>
+      <span>{context.form.instructions}</span>
       <button
         page={1}
         onClick={(e) => {
-          editFunction(e);
+          context.handleEdit(e);
         }}
       >
         Back to animation
