@@ -10,11 +10,17 @@ import { NewTaskFormProgressContainer } from "../components/styled/NewTaskFormPr
 import { CSSTransition } from "react-transition-group";
 import "../animations.css";
 import { useTitle } from "../hooks/useTitle";
+import { useWebsites } from "../hooks/useWebsites";
+import { NewTaskContext } from "../components/forms/task/context/NewTaskContext";
 
 const NewTask = () => {
+  // Check if use has an existing token and if it's not expired. If not authorized, redirect to login.
   const { token, isExpired } = useCheckAuth();
+  const navigate = useNavigate();
+
   const [progress, setProgress] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
+  const [previousPage, setPreviousPage] = useState("");
   const [transitions, setTransitions] = useState([false, false, false, false]);
   const [form, setForm] = useState({
     category: "",
@@ -22,35 +28,48 @@ const NewTask = () => {
     url: "",
     instructions: "",
   });
-  const navigate = useNavigate();
+
+  const [websiteOptions, setWebsiteOptions] = useState(false);
+  const [chosenWebsite, setChosenWebsite] = useState("");
+
+  const { websites, handleQuery } = useWebsites();
+
+  const handleWebsiteOptions = (e) => {
+    setWebsiteOptions(!websiteOptions);
+    setChosenWebsite(e.target.value);
+  };
+
+  const handleDeleteChosenWebsite = (e) => {
+    setChosenWebsite("");
+  };
 
   useTitle();
 
   useEffect(() => {
+    const temp = transitions;
+    if (previousPage || previousPage === 0) temp[previousPage] = false;
     if (currentPage === 0) {
-      const temp = transitions;
       temp[currentPage] = true;
       setTransitions([...temp]);
     } else {
-      const temp = transitions;
-      temp[currentPage - 1] = false;
-      setTimeout(() => {
-        temp[currentPage] = true;
-        setTransitions([...temp]);
-      }, 200);
+      temp[currentPage] = true;
+      setTransitions([...temp]);
     }
-  }, [currentPage]);
+  }, [currentPage, previousPage]);
 
-  const prevPage = () => {
+  const prevPage = (e) => {
+    setPreviousPage((page) => currentPage);
+    setProgress((progress) => progress - 25);
     setCurrentPage((page) => page - 1);
   };
-  const nextPage = () => {
+  const nextPage = (e) => {
+    setPreviousPage((page) => currentPage);
     setProgress((progress) => progress + 25);
     setCurrentPage((page) => page + 1);
   };
 
   const handleFormChange = (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     setForm((form) => {
       return {
         ...form,
@@ -58,11 +77,12 @@ const NewTask = () => {
           e.target.value || e.target.getAttribute("categoryname") || "",
       };
     });
-    console.log(form);
+    // console.log(form);
   };
 
   const handleEdit = (e) => {
     const targetPage = Number(e.target.getAttribute("page"));
+    setPreviousPage((page) => currentPage);
     setProgress((progress) => targetPage * 25);
     switch (targetPage) {
       case 0:
@@ -80,76 +100,90 @@ const NewTask = () => {
 
   return (
     <>
-      <NewTaskContainer justify="center" align="center">
-        <NewTaskFormProgressContainer progress={progress}>
-          <div className="progressFormBar" data-progress={progress}>
-            {progress > 0 ? `${progress}%` : null}
+      <NewTaskContext.Provider
+        value={{
+          form,
+          currentPage,
+          previousPage,
+          prevPage,
+          nextPage,
+          handleFormChange,
+          chosenWebsite,
+          websiteOptions,
+          setWebsiteOptions,
+          handleWebsiteOptions,
+          handleDeleteChosenWebsite,
+          websites,
+          handleQuery,
+        }}
+      >
+        <NewTaskContainer justify="center" align="center">
+          <NewTaskFormProgressContainer progress={progress}>
+            <div className="progressFormBar" data-progress={progress}>
+              {progress > 0 ? `${progress}%` : null}
+            </div>
+          </NewTaskFormProgressContainer>
+          <div
+            className="exitNewTask"
+            onClick={(e) => {
+              navigate(-1);
+            }}
+          >
+            <IoChevronBack />
           </div>
-        </NewTaskFormProgressContainer>
-        <div
-          className="exitNewTask"
-          onClick={(e) => {
-            navigate(-1);
-          }}
-        >
-          <IoChevronBack />
-        </div>
-        {currentPage === 0 && (
-          <CSSTransition
-            in={transitions[currentPage]}
-            timeout={{
-              appear: 1000,
-              enter: 1000,
-              exit: 200,
-            }}
-            classNames="taskForm"
-            mountOnEnter={true}
-            unmountOnExit={true}
-          >
-            <Categories
-              selectCategory={nextPage}
-              setCategory={handleFormChange}
-              formState={form}
-            />
-          </CSSTransition>
-        )}
+          {currentPage === 0 && (
+            <CSSTransition
+              in={transitions[currentPage]}
+              timeout={{
+                appear: 1000,
+                enter: 1000,
+                exit: 200,
+              }}
+              classNames="taskForm"
+              mountOnEnter={true}
+              unmountOnExit={true}
+            >
+              <Categories />
+            </CSSTransition>
+          )}
 
-        {currentPage === 1 && (
-          <CSSTransition
-            in={transitions[currentPage]}
-            timeout={{
-              appear: 1000,
-              enter: 1000,
-              exit: 200,
-            }}
-            classNames="taskForm"
-            mountOnEnter={true}
-            unmountOnExit={true}
-          >
-            <Details
-              formState={form}
-              changeForm={handleFormChange}
-              nextPage={nextPage}
-            />
-          </CSSTransition>
-        )}
+          {currentPage === 1 && (
+            <CSSTransition
+              in={transitions[currentPage]}
+              timeout={{
+                appear: 1000,
+                enter: 1000,
+                exit: 200,
+              }}
+              classNames="taskForm"
+              mountOnEnter={true}
+              unmountOnExit={true}
+            >
+              <Details
+                formState={form}
+                changeForm={handleFormChange}
+                nextPage={nextPage}
+              />
+            </CSSTransition>
+          )}
 
-        {currentPage === 2 && (
-          <CSSTransition
-            in={transitions[currentPage]}
-            timeout={{
-              appear: 1000,
-              enter: 1000,
-              exit: 200,
-            }}
-            classNames="taskForm"
-            mountOnEnter={true}
-            unmountOnExit={true}
-          >
-            <Summary formState={form} editFunction={handleEdit} />
-          </CSSTransition>
-        )}
-      </NewTaskContainer>
+          {currentPage === 2 && (
+            <CSSTransition
+              in={transitions[currentPage]}
+              timeout={{
+                appear: 1000,
+                enter: 1000,
+                exit: 200,
+              }}
+              classNames="taskForm"
+              mountOnEnter={true}
+              unmountOnExit={true}
+            >
+              <Summary formState={form} editFunction={handleEdit} />
+            </CSSTransition>
+          )}
+        </NewTaskContainer>
+      </NewTaskContext.Provider>
     </>
   );
 };

@@ -1,21 +1,19 @@
-const CategoryItem = ({
-  name,
-  image,
-  selectCategory,
-  setCategory,
-  formState,
-}) => {
+import { useContext } from "react";
+import { NewTaskContext } from "./context/NewTaskContext";
+
+const CategoryItem = ({ name, image }) => {
+  const context = useContext(NewTaskContext);
   return (
     <>
       <button
         className={`categoryButton ${
-          formState?.category === name ? `categoryActive` : ``
+          context.form?.category === name ? `categoryActive` : ``
         }`}
         name="category"
         categoryname={name}
         onClick={(e) => {
-          setCategory(e);
-          selectCategory();
+          context.handleFormChange(e);
+          context.nextPage();
         }}
       >
         <img src={image} alt={name} />

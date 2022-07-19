@@ -9,6 +9,7 @@ export const NewTaskContainer = styled.main`
   flex-flow: column;
   gap: 40px;
   border-bottom: 20px solid var(--main);
+  padding: 50px 0;
   ${({ justify }) => (justify ? "justify-content:" + justify + ";" : "")}
   ${({ align }) => (align ? "align-items:" + align + ";" : "")}
   ${({ background }) => (background ? "background:" + background + ";" : null)}
@@ -101,6 +102,16 @@ export const NewTaskContainer = styled.main`
 
   & label > span {
     color: rgba(150, 150, 150, 1);
+  }
+
+  & label span.taskFormError {
+    background: red;
+    width: fit-content;
+    color: #fff;
+    padding: 3px 10px;
+    font-size: 16px;
+    margin-top: 10px;
+    border-radius: 3px;
   }
 
   & label input[type="text"],

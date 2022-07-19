@@ -1,36 +1,19 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
 import WebsiteFieldOptions from "./WebsiteFieldOptions";
-import { useWebsites } from "../../../hooks/useWebsites";
+import { NewTaskContext } from "./context/NewTaskContext";
 
-const Details = ({
-  formState,
-  changeForm,
-  nextPage,
-  searchWebsites,
-  prevPage,
-}) => {
-  const { websites, handleQuery } = useWebsites();
-  const [websiteOptions, setWebsiteOptions] = useState(false);
-  const [chosenWebsite, setChosenWebsite] = useState("");
+const Details = ({ searchWebsites }) => {
+  const context = useContext(NewTaskContext);
 
   const urlField = useRef();
 
   const handleChange = (e) => {
-    changeForm(e);
+    context.handleFormChange(e);
     if (e.target.name === "url") {
-      handleQuery(e);
+      context.handleQuery(e);
     }
   };
 
-  const handleWebsiteOptions = (e) => {
-    setWebsiteOptions(!websiteOptions);
-    urlField.current.blur();
-    setChosenWebsite(e.target.value);
-  };
-
-  const handleDeleteChosenWebsite = (e) => {
-    setChosenWebsite("");
-  };
   return (
     <div className="animationWrapper">
       <h1>Tell us more about your task...</h1>
@@ -40,52 +23,57 @@ const Details = ({
           Something descriptive like "Create new site" or "Change the color of
           my header".
         </span>
+        {context.formErrors.name.error && (
+          <span className="taskFormError">
+            {context.formErrors.name.message}
+          </span>
+        )}
         <input
           type="text"
-          value={formState.name}
+          value={context.form.name}
           name="name"
           autoComplete="off"
           onChange={handleChange}
+          onBlur={context.validateForm}
         />
       </label>
-      {formState.category !== "New Site" && (
+      {context.form.category !== "New Site" && (
         <label>
           <h2>Website</h2>
           <span>The website where the task will be completed.</span>
-          {chosenWebsite && (
+          {context.formErrors.url.error && (
+            <span className="taskFormError">
+              {context.formErrors.url.message}
+            </span>
+          )}
+          {context.chosenWebsite && (
             <div className="chosenWebsite">
               <span>
-                {chosenWebsite}
+                {context.chosenWebsite}
                 <span
                   className="removeWebsite"
-                  onClick={handleDeleteChosenWebsite}
+                  onClick={context.handleDeleteChosenWebsite}
                 >
                   &times;
                 </span>
               </span>
             </div>
           )}
-          {!chosenWebsite && (
+          {!context.chosenWebsite && (
             <input
               ref={urlField}
               type="text"
-              value={formState.url}
+              value={context.form.url}
               name="url"
               autoComplete="off"
               onChange={handleChange}
               onFocus={(e) => {
-                setWebsiteOptions(!websiteOptions);
+                context.setWebsiteOptions(!context.websiteOptions);
               }}
-              onBlur={handleWebsiteOptions}
+              onBlur={context.handleWebsiteOptions}
             />
           )}
-          {websiteOptions && (
-            <WebsiteFieldOptions
-              websites={websites}
-              changeForm={changeForm}
-              handleWebsiteOptions={handleWebsiteOptions}
-            />
-          )}
+          {context.websiteOptions && <WebsiteFieldOptions />}
         </label>
       )}
       <label>
@@ -95,18 +83,18 @@ const Details = ({
           task delivery.
         </span>
         <textarea
-          value={formState.instructions}
+          value={context.form.instructions}
           name="instructions"
           onChange={handleChange}
           rows="12"
         />
       </label>
       <div className="actionButtons">
-        {" "}
         <button
           className="btnNext"
+          page={0}
           onClick={(e) => {
-            prevPage();
+            context.prevPage();
           }}
         >
           Back
@@ -114,7 +102,7 @@ const Details = ({
         <button
           className="btnNext"
           onClick={(e) => {
-            nextPage();
+            context.nextPage();
           }}
         >
           Next

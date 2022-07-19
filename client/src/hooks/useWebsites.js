@@ -16,10 +16,10 @@ export const useWebsites = () => {
   const [query, setQuery] = useState({ category: "", url: "", sort: "url,1" });
 
   useEffect(() => {
-    console.log(query);
+    // console.log(query);
     const loadWebsites = async (params) => {
       const websites = await Websites.getWebsites(params);
-      console.log(websites);
+      // console.log(websites);
       setWebsites(websites);
       if (mainLoad && websites) {
         setMainLoad(false);

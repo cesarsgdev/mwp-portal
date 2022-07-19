@@ -1,19 +1,19 @@
+import { useContext } from "react";
+import { NewTaskContext } from "./context/NewTaskContext";
 import { SiWoo, SiWordpress } from "react-icons/si";
 
-const WebsiteFieldOptions = ({
-  websites,
-  changeForm,
-  handleWebsiteOptions,
-}) => {
+const WebsiteFieldOptions = () => {
+  const context = useContext(NewTaskContext);
+
   const handleSelectWebsite = (e) => {
-    changeForm(e);
-    handleWebsiteOptions(e);
+    context.handleFormChange(e);
+    context.handleWebsiteOptions(e);
   };
   return (
     <div className="formWebsiteList">
-      {!websites && <span>Loading...</span>}
-      {websites && <span>Select a website</span> &&
-        websites.map((website) => {
+      {!context.websites && <span>Loading...</span>}
+      {context.websites && <span>Select a website</span> &&
+        context.websites.map((website) => {
           return (
             <button
               name="url"
