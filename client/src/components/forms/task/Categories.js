@@ -16,7 +16,7 @@ const Categories = ({ selectCategory, setCategory, formState }) => {
   return (
     <>
       <div className="animationWrapper">
-        <h1>What's your task category?</h1>
+        <h1>What's your task category? with context</h1>
         <section className="taskCategories">
           <CategoryItem
             selectCategory={selectCategory}
