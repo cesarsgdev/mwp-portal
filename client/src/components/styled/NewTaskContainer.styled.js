@@ -137,6 +137,13 @@ export const NewTaskContainer = styled.main`
     border-color: var(--main-sub);
   }
 
+  & .actionButtons {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+  }
+
   & .animationWrapper button.btnNext {
     align-self: flex-end;
     font-family: var(--main-font), sans-serif;

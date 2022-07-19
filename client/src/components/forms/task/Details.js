@@ -2,7 +2,13 @@ import { useState, useRef } from "react";
 import WebsiteFieldOptions from "./WebsiteFieldOptions";
 import { useWebsites } from "../../../hooks/useWebsites";
 
-const Details = ({ formState, changeForm, nextPage, searchWebsites }) => {
+const Details = ({
+  formState,
+  changeForm,
+  nextPage,
+  searchWebsites,
+  prevPage,
+}) => {
   const { websites, handleQuery } = useWebsites();
   const [websiteOptions, setWebsiteOptions] = useState(false);
   const [chosenWebsite, setChosenWebsite] = useState("");
@@ -42,44 +48,46 @@ const Details = ({ formState, changeForm, nextPage, searchWebsites }) => {
           onChange={handleChange}
         />
       </label>
-      <label>
-        <h2>Website</h2>
-        <span>The website where the task will be completed.</span>
-        {chosenWebsite && (
-          <div className="chosenWebsite">
-            <span>
-              {chosenWebsite}
-              <span
-                className="removeWebsite"
-                onClick={handleDeleteChosenWebsite}
-              >
-                &times;
+      {formState.category !== "New Site" && (
+        <label>
+          <h2>Website</h2>
+          <span>The website where the task will be completed.</span>
+          {chosenWebsite && (
+            <div className="chosenWebsite">
+              <span>
+                {chosenWebsite}
+                <span
+                  className="removeWebsite"
+                  onClick={handleDeleteChosenWebsite}
+                >
+                  &times;
+                </span>
               </span>
-            </span>
-          </div>
-        )}
-        {!chosenWebsite && (
-          <input
-            ref={urlField}
-            type="text"
-            value={formState.url}
-            name="url"
-            autoComplete="off"
-            onChange={handleChange}
-            onFocus={(e) => {
-              setWebsiteOptions(!websiteOptions);
-            }}
-            onBlur={handleWebsiteOptions}
-          />
-        )}
-        {websiteOptions && (
-          <WebsiteFieldOptions
-            websites={websites}
-            changeForm={changeForm}
-            handleWebsiteOptions={handleWebsiteOptions}
-          />
-        )}
-      </label>
+            </div>
+          )}
+          {!chosenWebsite && (
+            <input
+              ref={urlField}
+              type="text"
+              value={formState.url}
+              name="url"
+              autoComplete="off"
+              onChange={handleChange}
+              onFocus={(e) => {
+                setWebsiteOptions(!websiteOptions);
+              }}
+              onBlur={handleWebsiteOptions}
+            />
+          )}
+          {websiteOptions && (
+            <WebsiteFieldOptions
+              websites={websites}
+              changeForm={changeForm}
+              handleWebsiteOptions={handleWebsiteOptions}
+            />
+          )}
+        </label>
+      )}
       <label>
         <h2>Instructions</h2>
         <span>
@@ -93,14 +101,25 @@ const Details = ({ formState, changeForm, nextPage, searchWebsites }) => {
           rows="12"
         />
       </label>
-      <button
-        className="btnNext"
-        onClick={(e) => {
-          nextPage();
-        }}
-      >
-        Next
-      </button>
+      <div className="actionButtons">
+        {" "}
+        <button
+          className="btnNext"
+          onClick={(e) => {
+            prevPage();
+          }}
+        >
+          Back
+        </button>
+        <button
+          className="btnNext"
+          onClick={(e) => {
+            nextPage();
+          }}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };

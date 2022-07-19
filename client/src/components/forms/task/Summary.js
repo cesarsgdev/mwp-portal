@@ -4,7 +4,7 @@ const Summary = ({ formState, editFunction }) => {
       <h1>Your task summary...</h1>
       <span>{formState.category}</span>
       <span>{formState.name}</span>
-      <span>{formState.website}</span>
+      <span>{formState.url}</span>
       <span>{formState.instructions}</span>
       <button
         page={1}
