@@ -19,7 +19,7 @@ const Categories = () => {
   return (
     <>
       <div className="animationWrapper">
-        <h1>What's your task category? with context</h1>
+        <h1>What's your task category?</h1>
         <section className="taskCategories">
           <CategoryItem name="New Site" image={newSite} />
           <CategoryItem name="New Features" image={newFeatures} />
