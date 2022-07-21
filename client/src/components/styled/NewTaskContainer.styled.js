@@ -276,4 +276,84 @@ export const NewTaskContainer = styled.main`
   & .chosenWebsite .removeWebsite:hover {
     cursor: pointer;
   }
+
+  & table {
+    width: 60%;
+  }
+
+  & th {
+    width: 100%;
+    font-size: 22px;
+    text-align: left;
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+    background: var(--main);
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  & th {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 22px;
+    text-align: left;
+    letter-spacing: -0.5px;
+    background: var(--main);
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  & th button {
+    font-family: var(--main-font);
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 5px;
+    width: 100px;
+    background: var(--main-sub);
+    color: #fff;
+    border: 0;
+  }
+
+  & th button:hover {
+    cursor: pointer;
+  }
+
+  & tr:nth-of-type(2) th {
+    border-radius: 0px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+
+  & tr {
+    display: flex;
+    flex-flow: column wrap;
+    width: 100%;
+    background: #fff;
+  }
+
+  & td {
+    width: 100%;
+    font-size: 20px;
+    letter-spacing: -0.5px;
+    padding: 25px 10px;
+  }
+
+  & td.detailsHead {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    background: var(--terciary);
+    padding: 5px 10px;
+    color: #fff;
+    border-radius: 5px;
+  }
+
+  & tr td:nth-of-type(1).detailsHead {
+    border-radius: 0px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
 `;
