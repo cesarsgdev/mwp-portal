@@ -277,6 +277,41 @@ export const NewTaskContainer = styled.main`
     cursor: pointer;
   }
 
+  & h1.filesHeading {
+    display: flex;
+    flex-flow: column wrap;
+    text-align: center;
+  }
+
+  & h1.filesHeading span {
+    font-size: 22px;
+    font-weight: 400;
+    color: rgba(150, 150, 150, 1);
+    letter-spacing: 0px;
+  }
+
+  & .filesDropArea {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 400px;
+    border: dashed 3px var(--main-sub);
+    border-radius: 5px;
+    transition: 0.5s;
+    cursor: pointer;
+  }
+
+  & .filesDropArea:hover {
+    background: #fff;
+  }
+
+  & .filesDropArea h2 {
+    color: rgba(150, 150, 150, 1);
+    user-select: none;
+    pointer-events: none;
+  }
+
   & table {
     width: 60%;
   }

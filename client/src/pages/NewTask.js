@@ -9,6 +9,7 @@ import { IoChevronBack } from "react-icons/io5";
 import { CSSTransition } from "react-transition-group";
 import Categories from "../components/forms/task/Categories";
 import Details from "../components/forms/task/Details";
+import Files from "../components/forms/task/Files";
 import Summary from "../components/forms/task/Summary";
 import "../animations.css";
 
@@ -71,6 +72,22 @@ const NewTask = () => {
           )}
 
           {context.currentPage === 2 && (
+            <CSSTransition
+              in={context.transitions[context.currentPage]}
+              timeout={{
+                appear: 1000,
+                enter: 1000,
+                exit: 200,
+              }}
+              classNames="taskForm"
+              mountOnEnter={true}
+              unmountOnExit={true}
+            >
+              <Files />
+            </CSSTransition>
+          )}
+
+          {context.currentPage === 3 && (
             <CSSTransition
               in={context.transitions[context.currentPage]}
               timeout={{
