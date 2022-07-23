@@ -72,6 +72,9 @@ export const useNewTask = () => {
       case 1:
         setCurrentPage((page) => targetPage);
         break;
+      case 2:
+        setCurrentPage((page) => targetPage);
+        break;
       default:
         break;
     }
@@ -93,5 +96,6 @@ export const useNewTask = () => {
     handleQuery,
     handleEdit,
     transitions,
+    progress,
   };
 };

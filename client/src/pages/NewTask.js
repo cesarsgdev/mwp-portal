@@ -19,6 +19,7 @@ const NewTask = () => {
   const navigate = useNavigate();
   useTitle();
   const context = useNewTask();
+  console.log(context.progress);
 
   if (!token || isExpired) return <Navigate to="/login"></Navigate>;
 

@@ -46,7 +46,15 @@ const Summary = () => {
           </tr>
           <tr>
             <th>
-              Files<button>Edit</button>
+              Files
+              <button
+                page={2}
+                onClick={(e) => {
+                  handleEdit(e);
+                }}
+              >
+                Edit
+              </button>
             </th>
             <td>Files placeholder...</td>
           </tr>

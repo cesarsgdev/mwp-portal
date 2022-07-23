@@ -292,6 +292,8 @@ export const NewTaskContainer = styled.main`
 
   & .filesDropArea {
     display: flex;
+    flex-flow: column;
+    gap: 10px;
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -302,7 +304,16 @@ export const NewTaskContainer = styled.main`
     cursor: pointer;
   }
 
+  & .filesDropArea svg {
+    font-size: 48px;
+    color: var(--main);
+  }
+
   & .filesDropArea:hover {
+    background: #fff;
+  }
+
+  & .fileOver {
     background: #fff;
   }
 
@@ -310,6 +321,17 @@ export const NewTaskContainer = styled.main`
     color: rgba(150, 150, 150, 1);
     user-select: none;
     pointer-events: none;
+  }
+
+  & .filesDropArea span {
+    color: rgba(185, 185, 185, 1);
+  }
+
+  & input[type="file"] {
+    position: absolute;
+    top: -3000px;
+    left: -3000px;
+    opacity: 0;
   }
 
   & table {
@@ -380,15 +402,10 @@ export const NewTaskContainer = styled.main`
     font-size: 16px;
     font-weight: 700;
     letter-spacing: -0.5px;
-    background: var(--terciary);
+    background: rgba(235, 235, 235, 1);
     padding: 5px 10px;
-    color: #fff;
+    color: #000;
     border-radius: 5px;
-  }
-
-  & tr td:nth-of-type(1).detailsHead {
     border-radius: 0px;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
   }
 `;
