@@ -64,3 +64,5 @@ const getWebsiteById = async (req, res) => {
 };
 
 exports.getWebsiteById = getWebsiteById;
+
+const addWebsite = async (req, res, role = "client") => {};
